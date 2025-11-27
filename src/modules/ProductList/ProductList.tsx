@@ -1,5 +1,5 @@
 import type { Product } from "constant/basicType";
-import type { FC } from "react";
+import { type FC } from "react";
 import { Card } from "UI/Card/Card";
 
 interface Props {
@@ -11,14 +11,14 @@ interface Props {
 export const ProductList: FC<Props> = ({ title, products, isLoading }) => {
   return (
     <>
-      <h2 className="uppercase text-2xl font-bold p-5">{title}</h2>
+      <h2 className="uppercase text-3xl font-bold p-5 pl-25">{title}</h2>
       {isLoading ? (
         <div>loading...</div>
       ) : (
-        <div className="grid grid-cols-3 ">
-          {products.map((item) => (
+        <div className="w-[85%] ml-[10%] grid grid-cols-3 gap-10 ">
+          {products.map((item, index) => (
             <Card
-              description={item.description}
+              key={index}
               image={`${item.images}`}
               price={item.price}
               rating={item.rating}

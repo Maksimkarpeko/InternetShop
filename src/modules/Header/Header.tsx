@@ -1,13 +1,14 @@
 import basket from "assets/basket.svg";
-import search from "assets/search.png";
+import { Search } from "lucide-react";
+import { Button } from "UI/Button/Button";
 export const Header = () => {
   return (
-    <header className="flex flex-wrap justify-around bg-bg h-21 ">
+    <header className="flex flex-wrap justify-around bg-teal-900 h-21 ">
       <div className="mt-2">
-        <h1 className="text-5xl text-second-color font-bold">General Store</h1>
+        <h1 className="text-5xl text-white font-bold">General Store</h1>
       </div>
       <div className="mt-4 relative">
-        <img src={search} alt="search" className="absolute top-3 left-2" />
+        <Search className="absolute top-3 left-2" color="white"/>
         <input
           type="text"
           name="text"
@@ -15,8 +16,8 @@ export const Header = () => {
         />
       </div>
       <div className="w-[11%] mt-5">
-        <button
-          className=" w-full h-11 bg-second-color pr-3 rounded-xl text-white text-xl font-bold cursor-pointer flex justify-center   shadow-md transform active:scale-[0.95] duration-300"
+        <Button
+          className="w-full h-11 bg-second-color pr-3 rounded-xl text-white text-xl font-bold cursor-pointer flex justify-center   shadow-md transform active:scale-[0.95] duration-300"
           type="button"
         >
           <div className="pr-4 border-r border-r-white/50 h-7 mt-1.5">
@@ -26,7 +27,7 @@ export const Header = () => {
             <img src={basket} alt="basket" width={"25px"} className="" />
             <span className="pt-1.5 pl-2">3</span>
           </div>
-        </button>
+        </Button>
       </div>
     </header>
   );

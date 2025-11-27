@@ -1,26 +1,29 @@
 import type { FC } from "react";
-
+import { Button } from "UI/Button/Button";
+import { Counter } from "UI/Counter/Counter";
 interface Props {
   title: string;
   image: string;
   rating: number;
-  description: string;
   price: number;
 }
-export const Card: FC<Props> = ({
-  description,
-  image,
-  price,
-  rating,
-  title,
-}) => {
+export const Card: FC<Props> = ({ image, price, title}) => {
   return (
-    <div>
-      <img src={`${image}`} alt="imageProduct" />
-      <div>{title}</div>
-      <div>{description}</div>
-      <div>Price:{price}</div>
-      <div>Rating:{rating}</div>
+    <div className="border flex rounded-2xl p-5 shadow-lg">
+      <img src={`${image}`} alt="imageProduct" width={"50%"} />
+      <div>
+        <div className="text-xl font-bold">{title}</div>
+        <div className="mt-3">${price}</div>
+        <div className="my-5">
+          <Button
+            type="button"
+            classname="px-6 bg-second-color text-white font-bold hover:scale-[1.05] duration-300 uppercase shadow-md hover:shadow-lg "
+          >
+            Add to bucket
+          </Button>
+        </div>
+        <Counter/>
+      </div>
     </div>
   );
 };
