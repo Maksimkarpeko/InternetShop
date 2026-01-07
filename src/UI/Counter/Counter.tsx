@@ -1,13 +1,11 @@
-import { useState} from "react";
+import type { FC } from "react";
 
-export const Counter = () => {
-  const [counter, setCounter] = useState<number>(0);
-  const onIncrease = () => setCounter(counter + 1);
-  const onDecrease = () => {
-    if (counter > 0) {
-      setCounter(counter - 1);
-    }
-  };
+interface CounterProps {
+  counter: number
+  onIncrease: () => void
+  onDecrease: () => void
+}
+export const Counter:FC<CounterProps> = ({counter,onDecrease,onIncrease}) => {
   return (
     <div className="flex gap-11">
       <div

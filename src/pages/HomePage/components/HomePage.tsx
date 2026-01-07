@@ -6,9 +6,9 @@ import {
   useGetProducts,
   useIsLoading,
   useTotal,
-} from "./store/products.store";
+} from "../store/product/products.store";
 import Pagination from "@mui/material/Pagination";
-import { ShoppingBasket } from "lucide-react";
+import { LoaderCircle, ShoppingBasket } from "lucide-react";
 const LIMIT_PAGE = 30;
 export const HomePage = () => {
   const fetchProducts = useFetchProducts();
@@ -18,40 +18,43 @@ export const HomePage = () => {
   const totalPage = useTotal();
   useEffect(() => {
     fetchProducts(LIMIT_PAGE, page);
-  }, [page]);
+  }, [fetchProducts, page]);
+
   const filterProduct = products.filter(
     (item) =>
       !item.images.some(
         (img) => img.endsWith("/3.webp") || img.endsWith("/2.webp")
       )
   );
-  const countPage = Math.ceil((totalPage-30) / LIMIT_PAGE);
+  const countPage = Math.ceil((totalPage - 30) / LIMIT_PAGE);
   return (
     <>
       <BaseLayout>
-        {filterProduct.length > 0 ? (
+        {isLoading ? (
+          <LoaderCircle className="animate-spin mt-5 m-auto" size={30} />
+        ) : filterProduct.length > 0 ? (
+          <>
             <ProductList
               title="Our Products"
               products={filterProduct}
               isLoading={isLoading}
             />
+            <Pagination
+              count={countPage}
+              page={page}
+              onChange={(_, num) => setPage(num)}
+              variant="outlined"
+              className="ml-[39%] mt-5 mb-5"
+              size="large"
+            />
+          </>
         ) : (
           <div>
-            <h2>
-              No Products
-            </h2>
+            <h2>No Products</h2>
             <p>Discover the Freedom of Less</p>
-            <ShoppingBasket/>
+            <ShoppingBasket />
           </div>
         )}
-        <Pagination
-          count={countPage}
-          page={page}
-          onChange={(_, num) => setPage(num)}
-          variant="outlined"
-          className="ml-[39%] mt-5 mb-5"
-          size="large"
-        />
       </BaseLayout>
     </>
   );

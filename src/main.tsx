@@ -3,9 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { LINKS } from "./config/links.config";
-import { HomePage } from "pages/HomePage/HomePage";
+import { HomePage } from "pages/HomePage/index.ts";
 
-const router = createBrowserRouter([{ path: LINKS.mainPage, element:<HomePage/> }]);
+const router = createBrowserRouter([
+  { path: LINKS.mainPage, element: <HomePage /> },
+]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
