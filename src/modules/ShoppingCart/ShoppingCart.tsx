@@ -1,6 +1,7 @@
 // import { useCounter } from "hooks/useCounter";
 import { useCounter } from "hooks/useCounter";
 import { useAddProduct, type SelectProduct } from "pages/HomePage";
+import { useDeleteProduct } from "pages/HomePage/store/product/products.store";
 import type { FC } from "react";
 import { Button } from "UI/Button/Button";
 import { Counter } from "UI/Counter/Counter";
@@ -13,6 +14,7 @@ interface ShoppingCartProps {
 export const ShoppingCart: FC<ShoppingCartProps> = ({ item }) => {
   const { counter, onDecrease, onIncrease, setCounter } = useCounter();
   const addBucket = useAddProduct();
+  const deleteProduct = useDeleteProduct();
   return (
     <div
       key={item.selectProduct.id}
@@ -54,7 +56,14 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ item }) => {
             </p>
           </div>
           <div className="flex flex-col gap-5">
-            <Button classname="text-white  bg-second-color ">Delete</Button>
+            <Button classname="text-white  bg-second-color "
+            onClick={() => {
+              if (deleteProduct(item.selectProduct,counter)){
+                console.log("Product delete");
+                setCounter(0)
+              }
+            }}
+            >Delete</Button>
             <Button
               classname="text-white bg-second-color"
               onClick={() => {

@@ -1,5 +1,6 @@
 import type { SelectProduct } from "pages/HomePage";
 import type { FC } from "react";
+import { Button } from "UI/Button/Button";
 import { calculatePrice, calculateTotalPrice } from "utils/calculateTotalPrice";
 
 interface OrderSummaryProps {
@@ -37,6 +38,12 @@ export const OrderSummary: FC<OrderSummaryProps> = ({ products }) => {
           {calculateTotalPrice(products)}$
         </p>
       </div>
+      <Button
+        classname="mt-5 border-second-color bg-second-color text-white 
+        text-lg font-semibold"
+      >
+        Confirm Order
+      </Button>
     </div>
   );
 };

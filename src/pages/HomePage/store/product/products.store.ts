@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { ProductsStore, ProductStoreState } from "./type";
+import type { ProductsStore, ProductStoreState, SelectProduct } from "./type";
 import { getProducts } from "pages/HomePage/api/products";
 import { persist } from "zustand/middleware";
 const initialState: ProductStoreState = {
@@ -45,7 +45,26 @@ const useProductStore = create<ProductsStore>()(
           };
         });
         return true;
-      }
+      },
+      deleteProduct: (product, count) => {
+        if (count < 0) return false;
+        set((state) => {
+          return {
+            selectProducts: state.selectProducts
+              .map((item) => {
+                if (item.selectProduct.id === product.id) {
+                  const newCount = item.countSelect - count;
+                  return newCount > 0
+                    ? { ...item, countSelect: newCount }
+                    : null;
+                }
+                return item;
+              })
+              .filter((item): item is SelectProduct => item !== null),
+          };
+        });
+        return true;
+      },
     }),
     {
       name: "select-product",
@@ -65,3 +84,5 @@ export const useAddProduct = () =>
   useProductStore((state) => state.addToBucket);
 export const useSelectProduct = () =>
   useProductStore((state) => state.selectProducts);
+export const useDeleteProduct = () => 
+  useProductStore((state) => state.deleteProduct);

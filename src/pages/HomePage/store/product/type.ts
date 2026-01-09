@@ -14,5 +14,6 @@ export interface ProductStoreState {
 interface ProductStoreAction {
   fetchProducts: (limit: number, skip: number) => Promise<void>;
   addToBucket: (product: Product, count: number) => boolean;
+  deleteProduct: (product: Product, count:number) => boolean;
 }
 export interface ProductsStore extends ProductStoreState, ProductStoreAction {}
