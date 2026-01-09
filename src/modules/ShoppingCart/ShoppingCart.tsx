@@ -1,7 +1,6 @@
-// import { useCounter } from "hooks/useCounter";
 import { useCounter } from "hooks/useCounter";
 import { useAddProduct, type SelectProduct } from "pages/HomePage";
-import { useDeleteProduct } from "pages/HomePage/store/product/products.store";
+import { useDeleteProduct } from 'pages/HomePage';
 import type { FC } from "react";
 import { Button } from "UI/Button/Button";
 import { Counter } from "UI/Counter/Counter";
@@ -11,6 +10,7 @@ import { calculatePrice } from "utils/calculateTotalPrice";
 interface ShoppingCartProps {
   item: SelectProduct;
 }
+
 export const ShoppingCart: FC<ShoppingCartProps> = ({ item }) => {
   const { counter, onDecrease, onIncrease, setCounter } = useCounter();
   const addBucket = useAddProduct();
