@@ -12,20 +12,20 @@ export const StarRating: FC<Props> = ({ rating }) => {
       {stars.map((_, index) => (
         <div key={index}>
           {index <= rating ? (
-            <Star key={index} fill={"#f7de50"} color="#8b8181" size={30} />
+            <Star key={index} fill={"rgb(16 185 129)"} color="rgb(16 185 129)" size={18} />
           ) : !(index <= rating) && rating >= index - 0.5 ? (
-            <div className="mr-7">
+            <div className="mr-4">
               <Star
                 key={index}
                 fill="none"
-                color="#8b8181"
-                size={30}
+                color="rgb(16 185 129)"
+                size={18}
                 className="absolute"
               />
               <Star
-                size={30}
-                fill="#f7de50"
-                color="#8b8181"
+                size={18}
+                fill="rgb(16 185 129)"
+                color="rgb(16 185 129)"
                 className="absolute"
                 style={{
                   clipPath: "inset(0 50% 0 0)", 
@@ -33,7 +33,7 @@ export const StarRating: FC<Props> = ({ rating }) => {
               />
             </div>
           ) : (
-            <Star key={index} fill="none" color="#8b8181" size={30} />
+            <Star key={index} fill="none" color="rgb(16 185 129)" size={18} />
           )}
         </div>
       ))}

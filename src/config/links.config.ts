@@ -1,3 +1,4 @@
 export const LINKS = {
-  mainPage: '/'
+  mainPage: '/',
+  ordersPage : '/orderPage'
 } as const
