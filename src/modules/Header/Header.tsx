@@ -1,5 +1,4 @@
 import basket from "assets/basket.svg";
-import { Search } from "lucide-react";
 import { useSelectProduct } from "pages/HomePage";
 import { Button } from "UI/Button/Button";
 import { calculateTotalPrice } from "../../utils/calculateTotalPrice";
@@ -17,14 +16,6 @@ export const Header = () => {
         >
           General Store
         </h1>
-      </div>
-      <div className="mt-4 relative">
-        <Search className="absolute top-3 left-2" color="white" />
-        <input
-          type="text"
-          name="text"
-          className="outline-none bg-second-color text-gray-100 text-2xl rounded-xl p-1 pl-8.5 h-12"
-        />
       </div>
       <div className="w-[15%] mt-5">
         <Button

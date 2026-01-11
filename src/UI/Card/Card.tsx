@@ -12,7 +12,7 @@ interface Props {
 export const Card: FC<Props> = ({ image, price, title, onAdd }) => {
   const { counter, onDecrease, onIncrease, setCounter } = useCounter();
   return (
-    <div className="border flex rounded-2xl p-5 shadow-lg">
+    <div className="border flex rounded-2xl p-2 shadow-lg">
       <img src={`${image}`} alt="imageProduct" width={"50%"} />
       <div>
         <div className="text-xl font-bold">{title}</div>

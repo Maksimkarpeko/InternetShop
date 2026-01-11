@@ -4,3 +4,15 @@
   --color-bg: gray;
   --color-second-color: rgb(16 185 129);
 }
+
+
+
+input[type = range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid rgb(16 185 129);
+  cursor: pointer;
+}

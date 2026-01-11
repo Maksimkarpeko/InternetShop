@@ -9,6 +9,8 @@ import {
 } from "../store/product/products.store";
 import Pagination from "@mui/material/Pagination";
 import { LoaderCircle, ShoppingBasket } from "lucide-react";
+import { getCategories } from "../api/products";
+import { ProductFiltersPanel } from "modules/ProductFiltersPanel/ProductFiltersPanel";
 const LIMIT_PAGE = 30;
 export const HomePage = () => {
   const fetchProducts = useFetchProducts();
@@ -19,7 +21,9 @@ export const HomePage = () => {
   useEffect(() => {
     fetchProducts(LIMIT_PAGE, page);
   }, [fetchProducts, page]);
-
+  useEffect(() => {
+    console.log(getCategories());
+  }, []);
   const filterProduct = products.filter(
     (item) =>
       !item.images.some(
@@ -34,11 +38,14 @@ export const HomePage = () => {
           <LoaderCircle className="animate-spin mt-5 m-auto" size={30} />
         ) : filterProduct.length > 0 ? (
           <>
-            <ProductList
-              title="Our Products"
-              products={filterProduct}
-              isLoading={isLoading}
-            />
+            <h2 className="uppercase text-3xl font-bold p-5 pl-25">
+              Our Products
+            </h2>
+            <div className="flex gap-10">
+              <ProductFiltersPanel />
+              <ProductList products={filterProduct} isLoading={isLoading} />
+            </div>
+
             <Pagination
               count={countPage}
               page={page}
