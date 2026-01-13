@@ -1,12 +1,14 @@
 import { create } from "zustand";
 import type { ProductsStore, ProductStoreState, SelectProduct } from "./type";
-import { getProducts } from "pages/HomePage/api/products";
+import { getCategories, getProducts } from "pages/HomePage/api/products";
 import { persist } from "zustand/middleware";
 const initialState: ProductStoreState = {
   products: [],
   isLoading: false,
   total: 0,
   selectProducts: [],
+  categories:[],
+  maxPrice: 0,
 };
 
 const useProductStore = create<ProductsStore>()(
@@ -16,9 +18,14 @@ const useProductStore = create<ProductsStore>()(
       fetchProducts: async (limit, skip) => {
         set({ isLoading: true });
         const data = await getProducts(limit, skip);
+        console.log(data);
+        const allData = await getProducts(1000, 0);
+        const Price = allData?.products.map(item => item.price);
+        const maxPrice = Math.max(...(Price || [])); 
         set({
-          products: data.products,
-          total: data.total,
+          products: data?.products,
+          total: data?.total,
+          maxPrice
         });
         set({ isLoading: false });
       },
@@ -65,6 +72,10 @@ const useProductStore = create<ProductsStore>()(
         });
         return true;
       },
+      getCategories: async () => {
+        const dataCatalog = await getCategories();
+        set({categories: dataCatalog})
+      }
     }),
     {
       name: "select-product",
@@ -86,3 +97,6 @@ export const useSelectProduct = () =>
   useProductStore((state) => state.selectProducts);
 export const useDeleteProduct = () => 
   useProductStore((state) => state.deleteProduct);
+export const useGetCategories = () => useProductStore((state) => state.getCategories);
+export const useCategories = () => useProductStore((state) => state.categories);
+export const useMaxPrice = () => useProductStore((state) => state.maxPrice)

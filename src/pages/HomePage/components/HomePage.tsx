@@ -9,7 +9,6 @@ import {
 } from "../store/product/products.store";
 import Pagination from "@mui/material/Pagination";
 import { LoaderCircle, ShoppingBasket } from "lucide-react";
-import { getCategories } from "../api/products";
 import { ProductFiltersPanel } from "modules/ProductFiltersPanel/ProductFiltersPanel";
 const LIMIT_PAGE = 30;
 export const HomePage = () => {
@@ -21,9 +20,7 @@ export const HomePage = () => {
   useEffect(() => {
     fetchProducts(LIMIT_PAGE, page);
   }, [fetchProducts, page]);
-  useEffect(() => {
-    console.log(getCategories());
-  }, []);
+  
   const filterProduct = products.filter(
     (item) =>
       !item.images.some(
@@ -31,6 +28,7 @@ export const HomePage = () => {
       )
   );
   const countPage = Math.ceil((totalPage - 30) / LIMIT_PAGE);
+
   return (
     <>
       <BaseLayout>

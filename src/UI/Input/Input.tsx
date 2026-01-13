@@ -5,12 +5,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   placeholder: string;
   mode: "search" | "default";
+  classname?: string,
 }
 export const Input: FC<InputProps> = ({
   type,
   name,
   placeholder,
   mode,
+  classname,
   ...rest
 }) => {
   return (
@@ -21,9 +23,7 @@ export const Input: FC<InputProps> = ({
           <input type={type} name={name} placeholder={placeholder} {...rest} className="border border-gray-400/55 rounded-xl mt-4 ml-4 pl-9 py-3 text-xl" />
         </div>
       ) : (
-        <>
-          <input type={type} name={name} placeholder={placeholder} {...rest} />
-        </>
+          <input className={classname} type={type} name={name} placeholder={placeholder} {...rest} />
       )}
     </>
   );
